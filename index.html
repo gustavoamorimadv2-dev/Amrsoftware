@@ -15,7 +15,7 @@
 
 body {
   height: 100vh;
-  background: #0f172a; /* azul escuro elegante */
+  background: #0f172a;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,11 +56,6 @@ body {
   color: white;
   font-size: 14px;
   outline: none;
-  transition: 0.2s;
-}
-
-.input-group input:focus {
-  background: #374151;
 }
 
 button {
@@ -72,11 +67,16 @@ button {
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 button:hover {
   background: #1d4ed8;
+}
+
+.error {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #ef4444;
 }
 
 .footer {
@@ -85,7 +85,6 @@ button:hover {
   color: #6b7280;
 }
 </style>
-
 </head>
 <body>
 
@@ -94,19 +93,54 @@ button:hover {
   <p>Bem-vindo ao seu CRM.<br>Faça login para continuar.</p>
 
   <div class="input-group">
-    <input type="email" placeholder="E-mail" required />
+    <input type="email" id="email" placeholder="E-mail" required />
   </div>
 
   <div class="input-group">
-    <input type="password" placeholder="Senha" required />
+    <input type="password" id="password" placeholder="Senha" required />
   </div>
 
-  <button>Entrar</button>
+  <button onclick="login()">Entrar</button>
+
+  <div class="error" id="error"></div>
 
   <div class="footer">
     © 2026 AMR Software
   </div>
 </div>
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAFJJAqVf3ge0WDHBpmS9E6sXKvnjuFkhw",
+    authDomain: "dapapp-38637.firebaseapp.com",
+    projectId: "dapapp-38637",
+    storageBucket: "dapapp-38637.appspot.com",
+    messagingSenderId: "628852295313",
+    appId: "1:628852295313:web:1234567890abcdef123456"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.login = function() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const errorDiv = document.getElementById("error");
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Login OK
+        window.location.href = "/dashboard.html"; 
+      })
+      .catch((error) => {
+        errorDiv.innerText = "E-mail ou senha inválidos.";
+      });
+  }
+</script>
 
 </body>
 </html>
