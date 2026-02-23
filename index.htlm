@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Área do Cliente - Precarápido Office</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#f5f7fa,#e4e8f0);
+}
+
+.login-box{
+background:#fff;
+padding:40px;
+border-radius:25px;
+width:100%;
+max-width:350px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.login-box h1{
+font-size:22px;
+margin-bottom:25px;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border-radius:12px;
+border:1px solid #ddd;
+outline:none;
+font-size:14px;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#111;
+color:#fff;
+font-size:15px;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+opacity:.85;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+<h1>Área do Cliente</h1>
+<input type="email" id="email" placeholder="Seu e-mail">
+<input type="password" id="senha" placeholder="Sua senha">
+<button onclick="login()">Entrar</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+const firebaseConfig = {
+apiKey: "SUA_API",
+authDomain: "SEU_DOMINIO",
+projectId: "SEU_PROJETO"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.login = function(){
+const email = document.getElementById('email').value;
+const senha = document.getElementById('senha').value;
+
+signInWithEmailAndPassword(auth,email,senha)
+.then(()=> window.location.href="area-cliente.html")
+.catch(()=> alert("Login inválido"));
+}
+</script>
+
+</body>
+</html>
