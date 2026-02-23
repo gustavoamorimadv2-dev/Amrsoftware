@@ -1,305 +1,112 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - AMR ADV</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AMR ADV - Login</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-body{
-display:flex;
-height:100vh;
-overflow:hidden;
+body {
+  height: 100vh;
+  background: #0f172a; /* azul escuro elegante */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* ===== LADO ESQUERDO ===== */
-.left{
-width:40%;
-background:#151633;
-color:#fff;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:60px;
+.login-container {
+  background: #111827;
+  padding: 40px;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  text-align: center;
 }
 
-.left h1{
-font-size:28px;
-margin-bottom:10px;
+.login-container h1 {
+  color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
-.left p{
-font-size:14px;
-margin-bottom:30px;
-opacity:.8;
+.login-container p {
+  color: #9ca3af;
+  font-size: 14px;
+  margin-bottom: 30px;
 }
 
-.login-box{
-width:100%;
-max-width:320px;
+.input-group {
+  margin-bottom: 18px;
 }
 
-input{
-width:100%;
-padding:14px;
-margin-bottom:15px;
-border:none;
-border-radius:8px;
-font-size:14px;
-outline:none;
+.input-group input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  background: #1f2937;
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
 }
 
-button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:8px;
-background:#fff;
-color:#151633;
-font-weight:600;
-cursor:pointer;
-transition:.3s;
+.input-group input:focus {
+  background: #374151;
 }
 
-button:hover{
-opacity:.85;
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-/* ===== LADO DIREITO ===== */
-.right{
-width:60%;
-position:relative;
-overflow:hidden;
+button:hover {
+  background: #1d4ed8;
 }
 
-.right video{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-/* RESPONSIVO */
-@media(max-width:900px){
-.left{width:100%}
-.right{display:none}
+.footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #6b7280;
 }
 </style>
 
-<script>
-/* Forçar HTTPS */
-if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-location.replace('https://' + location.hostname + location.pathname + location.search);
-}
-</script>
-
 </head>
-
 <body>
 
-<div class="left">
-<h1>AMR ADV</h1>
-<p>Bem-vindo ao seu CRM. Faça login para continuar.</p>
+<div class="login-container">
+  <h1>AMR ADV</h1>
+  <p>Bem-vindo ao seu CRM.<br>Faça login para continuar.</p>
 
-<div class="login-box">
-<input type="email" id="email" placeholder="E-mail">
-<input type="password" id="senha" placeholder="Senha">
-<button onclick="login()">Entrar</button>
+  <div class="input-group">
+    <input type="email" placeholder="E-mail" required />
+  </div>
+
+  <div class="input-group">
+    <input type="password" placeholder="Senha" required />
+  </div>
+
+  <button>Entrar</button>
+
+  <div class="footer">
+    © 2026 AMR Software
+  </div>
 </div>
-</div>
-
-<div class="right">
-<video autoplay muted loop playsinline>
-<source src="videoamr.mp4" type="video/mp4">
-</video>
-</div>
-
-<!-- FIREBASE -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-
-const firebaseConfig = {
-apiKey: "SUA_API_KEY",
-authDomain: "SEU_DOMINIO.firebaseapp.com",
-projectId: "SEU_PROJECT_ID",
-appId: "SEU_APP_ID"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.login = function(){
-const email = document.getElementById("email").value;
-const senha = document.getElementById("senha").value;
-
-signInWithEmailAndPassword(auth,email,senha)
-.then(()=> window.location.href="dashboard.html")
-.catch(()=> alert("Login inválido"));
-}
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login - AMR ADV</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
-
-body{
-display:flex;
-height:100vh;
-overflow:hidden;
-}
-
-/* ===== LADO ESQUERDO ===== */
-.left{
-width:40%;
-background:#151633;
-color:#fff;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:60px;
-}
-
-.left h1{
-font-size:28px;
-margin-bottom:10px;
-}
-
-.left p{
-font-size:14px;
-margin-bottom:30px;
-opacity:.8;
-}
-
-.login-box{
-width:100%;
-max-width:320px;
-}
-
-input{
-width:100%;
-padding:14px;
-margin-bottom:15px;
-border:none;
-border-radius:8px;
-font-size:14px;
-outline:none;
-}
-
-button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:8px;
-background:#fff;
-color:#151633;
-font-weight:600;
-cursor:pointer;
-transition:.3s;
-}
-
-button:hover{
-opacity:.85;
-}
-
-/* ===== LADO DIREITO ===== */
-.right{
-width:60%;
-position:relative;
-overflow:hidden;
-}
-
-.right video{
-width:100%;
-height:100%;
-object-fit:cover;
-}
-
-/* RESPONSIVO */
-@media(max-width:900px){
-.left{width:100%}
-.right{display:none}
-}
-</style>
-
-<script>
-/* Forçar HTTPS */
-if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-location.replace('https://' + location.hostname + location.pathname + location.search);
-}
-</script>
-
-</head>
-
-<body>
-
-<div class="left">
-<h1>AMR ADV</h1>
-<p>Bem-vindo ao seu CRM. Faça login para continuar.</p>
-
-<div class="login-box">
-<input type="email" id="email" placeholder="E-mail">
-<input type="password" id="senha" placeholder="Senha">
-<button onclick="login()">Entrar</button>
-</div>
-</div>
-
-<div class="right">
-<video autoplay muted loop playsinline>
-<source src="videoamr.mp4" type="video/mp4">
-</video>
-</div>
-
-<!-- FIREBASE -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-
-const firebaseConfig = {
-apiKey: "AIzaSyAFJJAqVf3ge0WDHBpmS9E6sXKvnjuFkhw",
-    authDomain: "dapapp-38637.firebaseapp.com",
-    projectId: "dapapp-38637",
-    storageBucket: "dapapp-38637.appspot.com",
-    messagingSenderId: "628852295313",
-    appId: "1:628852295313:web:1234567890abcdef123456"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.login = function(){
-const email = document.getElementById("email").value;
-const senha = document.getElementById("senha").value;
-
-signInWithEmailAndPassword(auth,email,senha)
-.then(()=> window.location.href="dashboard.html")
-.catch(()=> alert("Login inválido"));
-}
-</script>
 
 </body>
 </html>
